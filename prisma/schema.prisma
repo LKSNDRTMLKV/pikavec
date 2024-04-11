@@ -1,0 +1,173 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// MODELS
+
+model User {
+  id                    String                 @id @default(cuid())
+  name                  String?
+  email                 String?                @unique
+  emailVerified         DateTime?
+  image                 String?
+  password              String?
+  role                  UserRole               @default(USER)
+  accounts              Account[]
+  isTwoFactorEnabled    Boolean                @default(false)
+  twoFactorConfirmation TwoFactorConfirmation?
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model VerificationToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model PasswordResetToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model TwoFactorToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model TwoFactorConfirmation {
+  id String @id @default(cuid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId])
+}
+
+model Horoscope {
+  id                        String                   @id @default(cuid())
+  sign                      String
+  description               String
+  enum                      HoroscopeSign
+  // logoId                    String
+  // logo                      Image @relation(name: "horoscopeToImages", references: [id], fields: [logoId])
+  dateStart                 DateTime
+  dateEnd                   DateTime
+  sexDrive                  Int?
+  hustle                    Int?
+  vibe                      Int?
+  success                   Int?
+  dailyHoroscope            DailyHoroscope[]         @relation(name: "horoscopeToDailyHoroscope")
+  horoscopeCompatibilitiesA HoroscopeCompatibility[] @relation(name: "signA")
+  horoscopeCompatibilitiesB HoroscopeCompatibility[] @relation(name: "signB")
+  createdAt                 DateTime                 @default(now()) @map("createdAt")
+  updatedAt                 DateTime                 @updatedAt @map("updatedAt")
+
+  @@unique([sign, dateStart, dateEnd])
+}
+
+model DailyHoroscope {
+  id                    String    @id @default(cuid())
+  horoscopeId           String
+  horoscope             Horoscope @relation(name: "horoscopeToDailyHoroscope", fields: [horoscopeId], references: [id])
+  date                  DateTime
+  familyDescription     String?
+  familyRating          Int?
+  loveDescription       String?
+  loveRating            Int?
+  friendshipDescription String?
+  friendshipRating      Int?
+  careerDescription     String?
+  careerRating          Int?
+  moneyDescription      String?
+  moneyRating           Int?
+  healthDescription     String?
+  healthRating          Int?
+  hapinessDescription   String?
+  hapinessRating        Int?
+  createdAt             DateTime  @default(now()) @map("createdAt")
+  updatedAt             DateTime  @updatedAt @map("updatedAt")
+}
+
+model HoroscopeCompatibility {
+  id            String    @id @default(cuid())
+  signAId       String
+  signA         Horoscope @relation(name: "signA", fields: [signAId], references: [id])
+  signBId       String
+  signB         Horoscope @relation(name: "signB", fields: [signBId], references: [id])
+  description   String
+  paragraph     String?
+  compatibility Int
+  createdAt     DateTime  @default(now()) @map("createdAt")
+  updatedAt     DateTime  @updatedAt @map("updatedAt")
+}
+
+model Image {
+  id        String   @id @default(cuid())
+  url       String
+  // horoscope Horoscope[] @relation(name: "horoscopeToImages")
+  createdAt DateTime @default(now()) @map("createdAt")
+  updatedAt DateTime @updatedAt @map("updatedAt")
+}
+
+// ENUMS
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
+enum HoroscopeSign {
+  ARIES
+  TAURUS
+  GEMINI
+  CANCER
+  LEO
+  VIRGO
+  LIBRA
+  SCORPIO
+  SAGITTARIUS
+  CAPRICORN
+  AQUARIUS
+  PISCES
+}
+
+enum HoroscopeType {
+  DAILY
+  WEEKLY
+  MONTHLY
+  YEARLY
+}

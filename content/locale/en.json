@@ -1,0 +1,11 @@
+{
+    "admin": {
+        "nav": {
+            "app_title": "Admin",
+            "home": "Home",
+            "users": "Users",
+            "settings": "Settings",
+            "logout": "Logout"
+        }
+    }
+}

@@ -1,0 +1,27 @@
+[
+    {
+        "label": "English",
+        "active": true,
+        "disabled": false
+    },
+    {
+        "label": "Македонски",
+        "active": false,
+        "disabled": true
+    },
+    {
+        "label": "Shqipe",
+        "active": false,
+        "disabled": true
+    },
+    {
+        "label": "Español",
+        "active": false,
+        "disabled": true
+    },
+    {
+        "label": "Deutsch",
+        "active": false,
+        "disabled": true
+    }
+]

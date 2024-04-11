@@ -1,0 +1,26 @@
+[
+    {
+      "label": "Light",
+      "value": "light",
+      "active": false,
+       "disabled": false
+    },
+    {
+      "label": "Dark",
+      "value": "dark",
+      "active": false,
+      "disabled": false
+    },
+    {
+      "label": "Electric pink",
+      "value": "electric-pink",
+      "active": false,
+      "disabled": true
+    },
+    {
+      "label": "System",
+      "value": "system",
+      "active": true,
+      "disabled": false
+    }
+]
