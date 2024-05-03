@@ -7,6 +7,16 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
+    './hooks/**/*.{ts,tsx}',
+    './providers/**/*.{ts,tsx}',
+    './data/**/*.{ts,tsx}',
+    './services/**/*.{ts,tsx}',
+    './assets/**/*.{ts,tsx}',
+    './utils/**/*.{ts,tsx}',
+    './auth/**/*.{ts,tsx}',
+    './api/**/*.{ts,tsx}',
+    './lib/**/*.{ts,tsx}',
+
 	],
   prefix: "",
   theme: {
@@ -18,6 +28,10 @@ const config = {
       },
     },
     extend: {
+      spacing: {
+        '128': '32rem',
+        '26': '6.5rem',
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

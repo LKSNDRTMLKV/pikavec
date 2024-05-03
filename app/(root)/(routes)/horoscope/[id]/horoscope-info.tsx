@@ -116,7 +116,7 @@ const HoroscopeInfoPage: React.FC<Horoscope> = (horoscope) => {
             <div className="flex flex-col gap-4">
 
                 <div className="bg-rio_blue_raspberry flex flex-row items-center gap-4 w-96 h-32 -m-8 rounded-full relative cursor-pointer animate-in"
-                    style={{ width: `${cockSize}%`, transform: shouldCum ? "rotate(60deg)" : "", transition: "1s ease-in-out" }}
+                    style={{ width: `${cockSize}%`, transform: shouldCum ? "rotate(30deg)" : "", transition: "1s ease-in-out" }}
                     onClick={handleCockSizeChange}
                 >
 

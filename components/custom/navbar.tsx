@@ -1,6 +1,5 @@
 'use client'
 
-import AppLogo from '@/app/favicon.ico';
 import { LanguageToggle } from "@/components/custom/language-toggle";
 import { ThemeToggle } from "@/components/custom/theme-toggle";
 import { Button } from "@/components/ui/button";
@@ -9,25 +8,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { UserButton } from '../auth/user-button';
 import { usePathname } from 'next/navigation';
+import { AppLogo } from "@/components/custom/app-logo";
 
 const Navbar = () => {
-    const  pathname  = usePathname();
+    const pathname = usePathname();
     return (
         <header>
             <nav className="border-b max-w-screen fixed top-0 left-0 w-full z-50 bg-background -mb-20">
-                <div className="flex h-20 justify-center items-center px-4">
+                <div className="flex h-20 justify-center items-center px-2">
 
-                    <div className="flex justify-center items-center">
-                        <Link className="flex flex-row items-center gap-2" href="/">
-                            <Image
-                                src={AppLogo}
-                                alt="riled-logo"
-                                className="w-10 h-10 rounded-xl"
-                            />
-                            <h2 className="text-2xl">Pikavec</h2>
-                            {/* <AvatarButton imgSrc="https://github.com/shadcn.png" isLogo /> */}
-                        </Link>
-                    </div>
+                    <AppLogo />
 
                     <div className="flex justify-center items-center mx-2 lg:mx-4 gap-4">
                         <div className="flex gap-x-2">

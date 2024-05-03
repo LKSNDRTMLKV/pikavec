@@ -6,12 +6,15 @@
 export const publicRoutes :string[] = [
     "/",
     "/auth/new-verification",
-    "/admin",
-    "/admin/dashboard",
-    "/admin/users",
-    "/admin/horoscope",
-    "/admin/go",
-    "/test"
+    // "/admin",
+    // "/admin/dashboard",
+    // "/admin/users",
+    // "/admin/horoscope",
+    // "/admin/go",
+    // "/admin/games",
+    // "/admin/account",
+    // "/test",
+    // "/api/uploadthing?slug=imageUploader"
   ];
 
   /**

@@ -12,7 +12,7 @@ const NotFoundPage = () => {
                 We couldn&apos;t find the page you were looking for.
             </p>
             <Button variant="secondary" asChild>
-                <Link href={home}>
+                <Link href={home.base}>
                     Go back home
                 </Link>
             </Button>

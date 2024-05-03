@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("LOCAL_DATABASE_URL")
 }
 
 // MODELS
@@ -20,6 +20,7 @@ model User {
   accounts              Account[]
   isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
+  dailyHoroscope        DailyHoroscope[]       @relation(name: "userToDailyHoroscope")
 }
 
 model Account {
@@ -82,17 +83,21 @@ model Horoscope {
   sign                      String
   description               String
   enum                      HoroscopeSign
-  // logoId                    String
-  // logo                      Image @relation(name: "horoscopeToImages", references: [id], fields: [logoId])
   dateStart                 DateTime
   dateEnd                   DateTime
+  eclipticLongitudeA        Int
+  eclipticLongitudeB        Int
+  polarity                  String
+  gloss                     String
+  planet                    String
+  element                   String
   sexDrive                  Int?
   hustle                    Int?
   vibe                      Int?
   success                   Int?
   dailyHoroscope            DailyHoroscope[]         @relation(name: "horoscopeToDailyHoroscope")
-  horoscopeCompatibilitiesA HoroscopeCompatibility[] @relation(name: "signA")
-  horoscopeCompatibilitiesB HoroscopeCompatibility[] @relation(name: "signB")
+  horoscopeCompatibilitiesA CompatibilityHoroscope[] @relation(name: "signA")
+  horoscopeCompatibilitiesB CompatibilityHoroscope[] @relation(name: "signB")
   createdAt                 DateTime                 @default(now()) @map("createdAt")
   updatedAt                 DateTime                 @updatedAt @map("updatedAt")
 
@@ -100,39 +105,68 @@ model Horoscope {
 }
 
 model DailyHoroscope {
-  id                    String    @id @default(cuid())
+  id                    String          @id @default(cuid())
+  authorId              String
+  author                User            @relation(name: "userToDailyHoroscope", fields: [authorId], references: [id])
   horoscopeId           String
-  horoscope             Horoscope @relation(name: "horoscopeToDailyHoroscope", fields: [horoscopeId], references: [id])
+  horoscope             Horoscope       @relation(name: "horoscopeToDailyHoroscope", fields: [horoscopeId], references: [id])
+  story                 String          @db.Text
   date                  DateTime
-  familyDescription     String?
+  planet                HoroscopePlanet
+  familyDescription     String?         @db.Text
   familyRating          Int?
-  loveDescription       String?
+  loveDescription       String?         @db.Text
   loveRating            Int?
-  friendshipDescription String?
+  friendshipDescription String?         @db.Text
   friendshipRating      Int?
-  careerDescription     String?
+  careerDescription     String?         @db.Text
   careerRating          Int?
-  moneyDescription      String?
+  moneyDescription      String?         @db.Text
   moneyRating           Int?
-  healthDescription     String?
+  healthDescription     String?         @db.Text
   healthRating          Int?
-  hapinessDescription   String?
-  hapinessRating        Int?
-  createdAt             DateTime  @default(now()) @map("createdAt")
-  updatedAt             DateTime  @updatedAt @map("updatedAt")
+  happinessDescription  String?         @db.Text
+  happinessRating       Int?
+  travelDescription     String?         @db.Text
+  travelRating          Int?
+  createdAt             DateTime        @default(now()) @map("createdAt")
+  updatedAt             DateTime        @updatedAt @map("updatedAt")
 }
 
-model HoroscopeCompatibility {
+model CompatibilityHoroscope {
   id            String    @id @default(cuid())
   signAId       String
   signA         Horoscope @relation(name: "signA", fields: [signAId], references: [id])
   signBId       String
   signB         Horoscope @relation(name: "signB", fields: [signBId], references: [id])
-  description   String
-  paragraph     String?
   compatibility Int
+  description   String
+  sex           String?   @db.Text
+  friendship    String?   @db.Text
+  family        String?   @db.Text
+  work          String?   @db.Text
+  love          String?   @db.Text
+  planets       String?   @db.Text
+  paragraph     String?   @db.Text
+  summary       String?   @db.Text
   createdAt     DateTime  @default(now()) @map("createdAt")
   updatedAt     DateTime  @updatedAt @map("updatedAt")
+
+  @@unique([signAId, signBId])
+}
+
+model PlanetHoroscope {
+  id          String          @id @default(cuid())
+  planet      String
+  enum        HoroscopePlanet
+  description String
+  nature      String
+  keywords    String[]
+  transition  String
+  within      String[]
+  life        String[]
+  createdAt   DateTime        @default(now()) @map("createdAt")
+  updatedAt   DateTime        @updatedAt @map("updatedAt")
 }
 
 model Image {
@@ -170,4 +204,24 @@ enum HoroscopeType {
   WEEKLY
   MONTHLY
   YEARLY
+}
+
+enum HoroscopeElement {
+  FIRE
+  EARTH
+  AIR
+  WATER
+}
+
+enum HoroscopePlanet {
+  SUN
+  MOON
+  MERCURY
+  VENUS
+  MARS
+  JUPITER
+  SATURN
+  URANUS
+  NEPTUNE
+  PLUTO
 }
