@@ -21,6 +21,7 @@ model User {
   isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
   dailyHoroscope        DailyHoroscope[]       @relation(name: "userToDailyHoroscope")
+  wordleUsers           WordleUsers[]          @relation(name: "userToWordle")
 }
 
 model Account {
@@ -91,10 +92,10 @@ model Horoscope {
   gloss                     String
   planet                    String
   element                   String
-  sexDrive                  Int?
-  hustle                    Int?
-  vibe                      Int?
-  success                   Int?
+  sexDrive                  String?
+  hustle                    String?
+  vibe                      String?
+  success                   String?
   dailyHoroscope            DailyHoroscope[]         @relation(name: "horoscopeToDailyHoroscope")
   horoscopeCompatibilitiesA CompatibilityHoroscope[] @relation(name: "signA")
   horoscopeCompatibilitiesB CompatibilityHoroscope[] @relation(name: "signB")
@@ -105,32 +106,33 @@ model Horoscope {
 }
 
 model DailyHoroscope {
-  id                    String          @id @default(cuid())
+  id                    String    @id @default(cuid())
   authorId              String
-  author                User            @relation(name: "userToDailyHoroscope", fields: [authorId], references: [id])
+  author                User      @relation(name: "userToDailyHoroscope", fields: [authorId], references: [id])
   horoscopeId           String
-  horoscope             Horoscope       @relation(name: "horoscopeToDailyHoroscope", fields: [horoscopeId], references: [id])
-  story                 String          @db.Text
+  horoscope             Horoscope @relation(name: "horoscopeToDailyHoroscope", fields: [horoscopeId], references: [id])
+  story                 String    @db.Text
   date                  DateTime
-  planet                HoroscopePlanet
-  familyDescription     String?         @db.Text
+  familyDescription     String?   @db.Text
   familyRating          Int?
-  loveDescription       String?         @db.Text
+  loveDescription       String?   @db.Text
   loveRating            Int?
-  friendshipDescription String?         @db.Text
+  friendshipDescription String?   @db.Text
   friendshipRating      Int?
-  careerDescription     String?         @db.Text
+  careerDescription     String?   @db.Text
   careerRating          Int?
-  moneyDescription      String?         @db.Text
+  moneyDescription      String?   @db.Text
   moneyRating           Int?
-  healthDescription     String?         @db.Text
+  healthDescription     String?   @db.Text
   healthRating          Int?
-  happinessDescription  String?         @db.Text
+  happinessDescription  String?   @db.Text
   happinessRating       Int?
-  travelDescription     String?         @db.Text
+  travelDescription     String?   @db.Text
   travelRating          Int?
-  createdAt             DateTime        @default(now()) @map("createdAt")
-  updatedAt             DateTime        @updatedAt @map("updatedAt")
+  isFeatured            Boolean   @default(true)
+  isArchived            Boolean   @default(false)
+  createdAt             DateTime  @default(now()) @map("createdAt")
+  updatedAt             DateTime  @updatedAt @map("updatedAt")
 }
 
 model CompatibilityHoroscope {
@@ -149,6 +151,8 @@ model CompatibilityHoroscope {
   planets       String?   @db.Text
   paragraph     String?   @db.Text
   summary       String?   @db.Text
+  isFeatured    Boolean   @default(true)
+  isArchived    Boolean   @default(false)
   createdAt     DateTime  @default(now()) @map("createdAt")
   updatedAt     DateTime  @updatedAt @map("updatedAt")
 
@@ -173,6 +177,27 @@ model Image {
   id        String   @id @default(cuid())
   url       String
   // horoscope Horoscope[] @relation(name: "horoscopeToImages")
+  createdAt DateTime @default(now()) @map("createdAt")
+  updatedAt DateTime @updatedAt @map("updatedAt")
+}
+
+model Wordle {
+  id          String        @id @default(cuid())
+  word        String
+  date        DateTime
+  wordleUsers WordleUsers[] @relation(name: "wordleToUser")
+  createdAt   DateTime      @default(now()) @map("createdAt")
+  updatedAt   DateTime      @updatedAt @map("updatedAt")
+}
+
+model WordleUsers {
+  id       String  @id @default(cuid())
+  wordleId String
+  wordle   Wordle  @relation(name: "wordleToUser", fields: [wordleId], references: [id])
+  userId   String
+  user     User    @relation(name: "userToWordle", fields: [userId], references: [id])
+  result   Boolean
+
   createdAt DateTime @default(now()) @map("createdAt")
   updatedAt DateTime @updatedAt @map("updatedAt")
 }

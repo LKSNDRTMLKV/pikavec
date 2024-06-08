@@ -16,11 +16,11 @@ const AdminLayout = async ({ children }: ChildrenProps) => {
     }
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5">
+        <div className="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-6">
             <div className="col-span-1 z-50">
                 <SideNavbar />
             </div>
-            <div className="col-span-3 md:col-span-3 lg:col-span-4 ">
+            <div className="col-span-4 md:col-span-4 lg:col-span-5 ">
                 {children}
             </div>
         </div>

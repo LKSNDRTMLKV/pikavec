@@ -1,5 +1,3 @@
-import { horoscopeMessages } from "@/constants/admin/horoscope";
-import { ApiResponse } from "@/interface/api-props";
 import prismadb from "@/lib/db/prisma-db";
 import { admin } from "@/services/auth/admin";
 import { DailyHoroscope } from "@prisma/client";
@@ -17,11 +15,7 @@ export async function GET({ id }: { id: string }) {
       },
     });
 
-    return NextResponse.json({
-      payload:dailyHoroscope,
-      message: horoscopeMessages.dailyFound,
-    }
-      , { status: 200 });
+    return NextResponse.json(dailyHoroscope, { status: 200 });
   } catch (error: any) {
     return new NextResponse(error, { status: 500 });
   }
@@ -49,13 +43,7 @@ export async function PATCH(req: Request, { id }: { id: string }) {
       data: body,
     });
 
-    return NextResponse.json(
-      {
-        payload: dailyHoroscope,
-        message: horoscopeMessages.dailyUpdated,
-      },
-      { status: 200 }
-    );
+    return NextResponse.json(dailyHoroscope,{ status: 200 });
   } catch (error: any) {
     return new NextResponse(error, { status: 500 });
   }
@@ -74,13 +62,7 @@ export async function DELETE(req: Request, { id }: { id: string }) {
       },
     });
 
-    return NextResponse.json(
-      {
-        payload: dailyHoroscope,
-        message: horoscopeMessages.dailyDeleted,
-      },
-      { status: 200 }
-    );
+    return NextResponse.json(dailyHoroscope,{ status: 200 });
   } catch (error: any) {
     return new NextResponse(error, { status: 500 });
   }

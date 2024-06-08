@@ -18,6 +18,12 @@ interface AdditionalProps {
     redirectTo?: string;
 }
 
+export interface useSubmitProps {
+    callback: (data: any) => Promise<ApiResponse>;
+    options?: UseSubmitOptions;
+    additionalProps?: AdditionalProps;
+}
+
 const useSubmit = <FormProps extends Record<string, any>>(
     callback: (data: FormProps) => Promise<ApiResponse>,
     options?: UseSubmitOptions,

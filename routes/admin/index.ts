@@ -1,12 +1,12 @@
 interface HoroscopeRoutesProps {
   daily: string;
-  compatability: string;
+  compatibility: string;
   hero: string;
 }
 
 const horoscopeRoutes: HoroscopeRoutesProps = {
   daily: "/admin/horoscope/daily",
-  compatability: "/admin/horoscope/compatability",
+  compatibility: "/admin/horoscope/compatibility",
   hero: "/admin/horoscope/hero",
 };
 

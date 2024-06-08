@@ -9,23 +9,45 @@ import Planet6 from "@/assets/planets/planet06.png";
 import Planet7 from "@/assets/planets/planet07.png";
 import Planet8 from "@/assets/planets/planet08.png";
 import Planet9 from "@/assets/planets/planet09.png";
+import BatmanAndRobin from "@/assets/fun/batman_and_robin.png";
+import BekiIRobi from "@/assets/fun/beki_i_robi.avif";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 
 const PlanetsPage = () => {
-
     return (
-        <div className="flex flex-wrap justify-center items-center">
-         <Image src={Planet0} alt="wow" width={300} height={300} />
-         <Image src={Planet1} alt="wow" width={300} height={300} />
-         <Image src={Planet2} alt="wow" width={300} height={300} />
-         <Image src={Planet3} alt="wow" width={300} height={300} />
-         <Image src={Planet4} alt="wow" width={300} height={300} />
-         <Image src={Planet5} alt="wow" width={300} height={300} />
-         <Image src={Planet6} alt="wow" width={300} height={300} />
-         <Image src={Planet7} alt="wow" width={300} height={300} />
-         <Image src={Planet8} alt="wow" width={300} height={300} />
-         <Image src={Planet9} alt="wow" width={300} height={300} />
+        <div className=" mb-128 w-full">
+            <div className="flex flex-wrap justify-center items-center">
+                <Image src={Planet0} alt="wow" width={300} height={300} />
+                <Image src={Planet1} alt="wow" width={300} height={300} />
+                <Image src={Planet2} alt="wow" width={300} height={300} />
+                <Image src={Planet3} alt="wow" width={300} height={300} />
+                <Image src={Planet4} alt="wow" width={300} height={300} />
+                <Image src={Planet5} alt="wow" width={300} height={300} />
+                <Image src={Planet6} alt="wow" width={300} height={300} />
+                <Image src={Planet7} alt="wow" width={300} height={300} />
+                <Image src={Planet8} alt="wow" width={300} height={300} />
+                <Image src={Planet9} alt="wow" width={300} height={300} />
+            </div>
+
+            {/* <div className="flex w-full justify-center relative mx-auto my-20">
+                <Image
+                    src={BatmanAndRobin}
+                    className="animate-custom-pulse absolute top-10 left-30 z-50"
+                    alt="batman_and_robin"
+                    width={300}
+                    height={300}
+                />
+                <Image
+                    src={BekiIRobi}
+                    className="absolute top-0 left-30 z-10"
+                    alt="beki_i_robi"
+                    width={300}
+                    height={300}
+                />
+            </div> */}
         </div>
+
+
         // <ResizablePanelGroup
         //     direction="horizontal"
         //     className="max-w-xxxl rounded-lg border"

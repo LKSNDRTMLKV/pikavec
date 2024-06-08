@@ -23,7 +23,8 @@ const DailyIdPage = async ({ params }: { params: { id: string } }) => {
         }
     })
 
-    console.log('dailyHoroscope', dailyHoroscope)
+    console.log(dailyHoroscope)
+
 
     if (!dailyHoroscope) return null
 
@@ -34,6 +35,7 @@ const DailyIdPage = async ({ params }: { params: { id: string } }) => {
                 horoscopes={horoscopes}
                 initialData={dailyHoroscope}
             />
+
         </>
     );
 }
