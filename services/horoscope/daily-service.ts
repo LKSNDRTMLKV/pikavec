@@ -32,12 +32,14 @@ const deleteDailyHoroscope = async ({ id }: { id: string }) => {
   return response.data;
 };
 
+
 const DailyService = {
   getDailyHoroscopes,
   getDailyHoroscope,
   createDailyHoroscope,
   updateDailyHoroscope,
   deleteDailyHoroscope,
+
 };
 
 export default DailyService;

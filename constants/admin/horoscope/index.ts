@@ -7,6 +7,7 @@ export const horoscopeMessages = {
   dailyCreated: "Created daily horoscope",
   dailyUpdated: "Updated daily horoscope",
   dailyDeleted: "Deleted daily horoscope",
+  dailyDelete: "Delete daily",
   dailyNotFound: "Not found daily horoscope",
   dailyCreate: "Create daily",
   dailyUpdate: "Update daily",

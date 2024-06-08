@@ -1,10 +1,13 @@
+import { DataTable } from '@/components/custom/data-table'
 import prismadb from '@/lib/db/prisma-db'
 import React from 'react'
 
 const HoroscopePage = async () => {
-  const horoscope = await prismadb.horoscope.findMany()
+  const horoscopes = await prismadb.horoscope.findMany()
   return (
-    <div>HoroscopePage</div>
+    <div>
+      {/* <DataTable searchKey='label' columns={columns} data={horoscopes} /> */}
+    </div>
   )
 }
 

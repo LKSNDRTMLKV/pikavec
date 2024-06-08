@@ -2,10 +2,13 @@
 
 import { Input } from "@/components/ui/input";
 import React, { useEffect, useMemo } from "react";
+// import words from '@/json/wordle-words.json'
+import words from '@/json/worlde-words.json'
+import Keyboard from "@/components/keyboard/keyboard";
 
 const WordlePage: React.FC = () => {
-    const numberOfRows : number = 6;
-    const numberOfColumns : number = 5;
+    const numberOfRows: number = 6;
+    const numberOfColumns: number = 5;
     const [wordleGrid, setWordleGrid] = React.useState(Array.from({ length: numberOfRows }, () => Array.from({ length: numberOfColumns }, () => null)));
     const [onCurrentRow, setOnCurrentRow] = React.useState<number>(0);
     const [guess, setGuess] = React.useState<string>("");
@@ -14,6 +17,7 @@ const WordlePage: React.FC = () => {
     const [isGameOver, setIsGameOver] = React.useState<boolean>(false);
     // const [currentGuess, setCurrentGuess] = React.useState<string[]>([]);
     let currentGuess: string[] = useMemo(() => [], []);
+
 
 
     const checkGuess = () => {
@@ -25,6 +29,7 @@ const WordlePage: React.FC = () => {
     console.log(wordleGrid)
 
     useEffect(() => {
+        console.log(words)
         // Logic to generate a random wordleGrid
         document.addEventListener("keydown", (event) => {
             if (event.key === "Backspace") {
@@ -33,7 +38,7 @@ const WordlePage: React.FC = () => {
             }
             else {
                 if (/^[a-zA-Z]$/.test(event.key)) {
-                    if(currentGuess.length === 5) return;
+                    if (currentGuess.length === 5) return;
                     currentGuess.push(event.key);
                     // setCurrentGuess((prevGuess) => [...prevGuess, event.key]);
                 }
@@ -45,26 +50,27 @@ const WordlePage: React.FC = () => {
 
     return (
         <div>
-        {
-            wordleGrid.map((row, rowIndex) => (
-                <div key={rowIndex} className="flex">
-                    {
-                        row.map((column, columnIndex) => (
-                            <div key={columnIndex} className="w-10 h-10 border border-gray-300 m-1">
-                                {rowIndex === onCurrentRow ?
-                                    <Input
-                                    type="text"
-                                    placeholder=""
-                                    className="w-10 h-10" /> :
-                                    null
-                                }
-                            </div>
-                        ))
-                    }
-                </div>
-            ))
-        }
-    </div>
+            {
+                wordleGrid.map((row, rowIndex) => (
+                    <div key={rowIndex} className="flex">
+                        {
+                            row.map((column, columnIndex) => (
+                                <div key={columnIndex} className="w-10 h-10 border border-gray-300 m-1">
+                                    {rowIndex === onCurrentRow ?
+                                        <Input
+                                            type="text"
+                                            placeholder=""
+                                            className="w-10 h-10" /> :
+                                        null
+                                    }
+                                </div>
+                            ))
+                        }
+                    </div>
+                ))
+            }
+            <Keyboard />
+        </div>
     );
 }
 export default WordlePage;

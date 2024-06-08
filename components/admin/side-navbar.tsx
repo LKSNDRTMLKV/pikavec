@@ -11,6 +11,7 @@ import React from 'react';
 import { AppLogo } from '../custom/app-logo';
 import { ScrollArea } from '../ui/scroll-area';
 import path from 'path';
+import { AdminSideNavSkeleton, DailyHoroscopeSkeleton } from '../custom/skeletons';
 
 const SideNavbar: React.FC = () => {
     const {
@@ -24,6 +25,7 @@ const SideNavbar: React.FC = () => {
 
     const pathname = usePathname();
 
+    const [isLoading, setIsLoading] = React.useState<boolean>(true);
     const [sideNavbarList, setSideNavbarList] = React.useState<SideNavBarProps[]>([
         {
             label: 'Home',
@@ -85,6 +87,7 @@ const SideNavbar: React.FC = () => {
                 };
             })
         );
+        setIsLoading(false);
     }, [pathname, home.base]);
 
     return (
@@ -106,24 +109,32 @@ const SideNavbar: React.FC = () => {
 
             <Separator />
 
-            <ScrollArea className='max-h-128'>
-                <div className="hidden md:block px-4 py-6">
-                    <ul className="space-y-2">
-                        {sideNavbarList.map((item, index) => (
-                            <li key={index} className={cn(
-                                "rounded-md text-lg text-muted-foreground hover:text-primary w-full h-full p-2 px-2",
-                                item.active ? " bg-secondary text-primary" : "",
-                            )}>
-                                <Link href={item.link} className='flex items-center gap-2 w-full h-full'>
-                                    {item.icon}
-                                    {item.label}
-                                </Link>
-                            </li>
-                        ))}
+            {
+                isLoading ?
+                    <AdminSideNavSkeleton
+                        length={sideNavbarList.length}
+                    /> :
+                    <>
+                        <ScrollArea className='max-h-128'>
+                            <div className="hidden md:block p-4">
+                                <ul className="space-y-2">
+                                    {sideNavbarList.map((item, index) => (
+                                        <li key={index} className={cn(
+                                            "rounded-md text-lg text-muted-foreground hover:text-primary w-full h-full p-2 px-2",
+                                            item.active ? " bg-secondary text-primary" : "",
+                                        )}>
+                                            <Link href={item.link} className='flex items-center gap-2 w-full h-full'>
+                                                {item.icon}
+                                                {item.label}
+                                            </Link>
+                                        </li>
+                                    ))}
 
-                    </ul>
-                </div>
-            </ScrollArea>
+                                </ul>
+                            </div>
+                        </ScrollArea>
+                    </>
+            }
 
             {/* Mobile and tablet version */}
             {/* <div className='md:hidden'>

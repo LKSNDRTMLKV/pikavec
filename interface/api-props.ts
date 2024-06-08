@@ -13,3 +13,9 @@ export interface AdditionalProps {
     origin?: string;
     redirectTo?: string;
 }
+
+export interface ApiListProps {
+    baseUrl: string;
+    entityName: string;
+    entityIdName: string;
+}

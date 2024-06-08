@@ -31,6 +31,8 @@ const config = {
       spacing: {
         '128': '32rem',
         '26': '6.5rem',
+        '10': '2.5rem',
+        '11': '2.75rem',
       },
       colors: {
         border: "hsl(var(--border))",
@@ -85,6 +87,28 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        'custom-pulse': {
+          '0%': { opacity:"1" },
+          '5%': { opacity:"0.95" },
+          '10%': { opacity:"0.9" },
+          '15%': { opacity:"0.85" },
+          '20%': { opacity:"0.8" },
+          '25%': { opacity:"0.75" },
+          '30%': { opacity:"0.7" },
+          '35%': { opacity:"0.65" },
+          '40%': { opacity:"0.6" },
+          '45%': { opacity:"0.55" },
+          '50%': { opacity:"0.5" },
+          '55%': { opacity:"0.45" },
+          '60%': { opacity:"0.4" },
+          '65%': { opacity:"0.35" },
+          '70%': { opacity:"0.3" },
+          '75%': { opacity:"0.25" },
+          '80%': { opacity:"0.2" },
+          '85%': { opacity:"0.15" },
+          '90%': { opacity:"0.1" },
+          '100%': { opacity:"0.1" },
+        },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -95,6 +119,7 @@ const config = {
         },
       },
       animation: {
+        "custom-pulse": "custom-pulse 4s ease-in-out infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
