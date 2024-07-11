@@ -10,7 +10,7 @@ import blackBishop from "@/assets/chess/SVG No shadow/b_bishop_svg_NoShadow.svg"
 import blackRook from "@/assets/chess/SVG No shadow/b_rook_svg_NoShadow.svg";
 import blackQueen from "@/assets/chess/SVG No shadow/b_queen_svg_NoShadow.svg";
 import blackKing from "@/assets/chess/SVG No shadow/b_king_svg_NoShadow.svg";
-import Piece from "@/logic/chess/model/piece";
+import Piece from "@/model/chess/piece";
 
 export enum Color {
   White,
@@ -33,23 +33,22 @@ export enum FENChar {
 }
 
 export enum MoveType {
-  Normal,
-  Castle,
   Capture,
-  EnPassant,
+  Castling,
   Promotion,
   Check,
-  Checkmate,
+  CheckMate,
+  BasicMove,
 }
 
-export interface LastMove {
+export type LastMove = {
   piece: Piece;
   prevX: number;
   prevY: number;
-  newX: number;
-  newY: number;
+  currX: number;
+  currY: number;
   moveType: Set<MoveType>;
-}
+};
 
 export interface Coordinates {
   x: number;
@@ -87,12 +86,26 @@ export type MoveList = [string, string?][];
 
 export type EmptySquare = null;
 
-export type Board = (Piece | null)[][];
+export type ChessBoard = (Piece | null)[][];
 
-export type BoardView = (FENChar | null)[][];
+export type BoardView = (FENChar | null)[][]; // 8x8 matrix
 
-export interface GameHistory {
-  lastMove: LastMove | null;
+export type GameHistory = {
+  lastMove: LastMove | undefined;
   checkState: CheckState;
-  board: (FENChar | null)[][]; // 8x8 matrix
-}
+  board: BoardView;
+}[];
+
+type SquareWithPiece = {
+  piece: FENChar;
+  x: number;
+  y: number;
+};
+
+type SquareWithoutPiece = {
+  piece: null;
+};
+
+export type SelectedSquare = SquareWithPiece | SquareWithoutPiece;
+
+export const columns: string[] = ["a", "b", "c", "d", "e", "f", "g", "h"];

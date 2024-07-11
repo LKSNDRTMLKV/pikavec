@@ -1,4 +1,4 @@
-import { Color, Coordinates, FENChar } from "@/interface/chess";
+import { Color, Coordinates, FENChar } from "@/interface/chess-props";
 
 export default abstract class Piece {
   protected abstract _FENChar: FENChar;

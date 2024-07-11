@@ -10,7 +10,7 @@ const RootLayout = ({ children }: ChildrenProps) => {
             <main>
                 {children}
             </main>
-            <Footer />
+            {/* <Footer /> */}
         </div>
     )
 };

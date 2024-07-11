@@ -1,4 +1,4 @@
-import { Color, Coordinates, FENChar } from "@/interface/chess";
+import { Color, Coordinates, FENChar } from "@/interface/chess-props";
 import Piece from "./piece";
 
 export default class Rook extends Piece {

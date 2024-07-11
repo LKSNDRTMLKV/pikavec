@@ -1,12 +1,13 @@
 
 
-import Chess from "@/logic/chess/model/chess";
+import Chess from "@/model/chess/chess-board";
 import ChessBoard from "./chess-board"
-import { BoardView, FENChar, pieceImagePaths } from "@/interface/chess";
+import { BoardView, FENChar, pieceImagePaths } from "@/interface/chess-props";
+import ChessBoardClient from "./chess-board-client";
 
 const Page = async () => {
-    const chess = new Chess();
-    const chessBoard : BoardView = chess.boardView;
+    // const chess = new Chess();
+    // const chessBoard: BoardView = chess.boardView;
 
 
     function getImageFromFENChar(FENChar: FENChar) {
@@ -17,10 +18,11 @@ const Page = async () => {
 
     return (
         <>
-            <ChessBoard
+            {/* <ChessBoard
                 chessBoard={chessBoard}
                 // getImageFromFENChar={getImageFromFENChar}
-            />
+            /> */}
+            <ChessBoardClient />
         </>
     )
 }
