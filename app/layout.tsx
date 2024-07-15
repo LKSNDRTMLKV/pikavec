@@ -28,8 +28,15 @@ export default async function RootLayout({
     <SessionProvider session={session}>
       <html lang="en">
         <body>
-          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-            <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <NextSSRPlugin
+              routerConfig={extractRouterConfig(ourFileRouter)}
+            />
             <Toaster />
             {children}
           </ThemeProvider>
